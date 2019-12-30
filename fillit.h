@@ -1,7 +1,7 @@
 #ifndef FILLIT_H
 # define FILLIT_H
 
-# define ERORR 1
+# define ERROR 1
 # define OK 0
 
 # define HOR 0b0000000000001111
@@ -24,7 +24,7 @@
 # define L_ZZ 0b0000000000110110
 # define VR_ZZ 0b0000001000110001
 
-#include "libft.h"
+#include "libft/libft.h"
 #include <fcntl.h>
 #include <stdint.h>
 
@@ -40,12 +40,12 @@ typedef struct s_tetr
 } t_tetr;
 
 
-void		ft_erorr();
+void		ft_error();
 void		ft_printer(t_tetr *tetr, int sq);
 int		ft_open(char *argv);
 int		ft_solver(t_tetr *tetr, uint16_t *map, int qt);
 t_tetr		ft_convert(uint16_t shape);
-t_tetr		ft_reader(char *argv, int file_d);
+t_tetr		ft_reader(int file_d);
 uint16_t	ft_check_symbols(char *str, int length);
 
 #endif

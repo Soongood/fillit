@@ -43,7 +43,7 @@ static int	ft_locate(t_tetr *tetr, uint16_t *map, int square)
 		}
 		tetr->t <<= x;
 	}
-	return (ERORR);
+	return (ERROR);
 }
 
 int		ft_solver(t_tetr *tetr, uint16_t *map, int qt)
