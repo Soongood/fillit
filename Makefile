@@ -16,9 +16,7 @@ FUNCTIONS = checker converter error main open printer reader solver
 
 O_FILES = $(addsuffix .o, $(FUNCTIONS))
 
-LIB = ./libft/libft.a
-
-LIBFT = libft
+LIBFT = ./libft/libft.a
 
 CFLAGS = -Wall -Wextra -Werror -I . -I $(LIBFT)
 
@@ -26,23 +24,21 @@ CFLAGS = -Wall -Wextra -Werror -I . -I $(LIBFT)
 
 all: $(NAME)
 
-$(NAME): $(LIB) $(O_FILES) ./libft/libft.a
-	@gcc $^ $(LIBFT)/libft.a -o $@
+$(NAME): $(O_FILES) $(LIBFT)
+	gcc $^ -o $@
 
-$(LIB):		FORCE
-	@make -C ./libft
-
-FORCE:	;
+$(LIBFT)::
+	make -C ./libft
 
 %.o: %.c
-	@gcc $(CFLAGS) -o $@ -c $<
+	gcc $(CFLAGS) -o $@ -c $<
 
 clean:
-	@/bin/rm -f $(O_FILES)
-	@make -C ./libft clean
+	/bin/rm -f $(O_FILES)
+	make -C ./libft clean
 
 fclean: clean
-	@/bin/rm -f $(NAME)
-	@make -C ./libft fclean
+	/bin/rm -f $(NAME)
+	make -C ./libft fclean
 
 re: fclean all
