@@ -38,7 +38,7 @@ FORCE:	;
 	@gcc $(CFLAGS) -o $@ -c $<
 
 clean:
-	@/bin/rm -f $(addsuffix .o,$(FUNCTIONS))
+	@/bin/rm -f $(O_FILES)
 	@make -C ./libft clean
 
 fclean: clean
