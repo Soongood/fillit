@@ -1,30 +1,48 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: baegon <baegon@student.42.fr>              +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2020/01/04 14:41:06 by baegon            #+#    #+#              #
+#    Updated: 2020/01/04 15:39:08 by baegon           ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+NAME = fillit
+
 FUNCTIONS = checker converter error main open printer reader solver
 
 O_FILES = $(addsuffix .o, $(FUNCTIONS))
+
+LIB = ./libft/libft.a
 
 LIBFT = libft
 
 CFLAGS = -Wall -Wextra -Werror -I . -I $(LIBFT)
 
-NAME = fillit
+FORCE:	;
 
 .PHONY: all clean fclean re
 
 all: $(NAME)
 
-$(NAME): $(O_FILES)
-	cd ./libft && make
-	gcc $^ $(LIBFT)/libft.a -o $@
+$(NAME): $(LIB) $(O_FILES) ./libft/libft.a
+	@gcc $^ $(LIBFT)/libft.a -o $@
+
+$(LIB):		FORCE
+	@make -C ./libft
 
 %.o: %.c
-	gcc $(CFLAGS) -o $@ -c $<
+	@gcc $(CFLAGS) -o $@ -c $<
 
 clean:
 	@/bin/rm -f $(addsuffix .o,$(FUNCTIONS))
-	cd ./libft && make clean
+	@make -C ./libft clean
 
 fclean: clean
 	@/bin/rm -f $(NAME)
-	cd ./libft && make fclean
+	@make -C ./libft fclean
 
 re: fclean all
