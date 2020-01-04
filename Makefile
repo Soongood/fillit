@@ -1,35 +1,30 @@
-NAME	= fillit
-
 FUNCTIONS = checker converter error main open printer reader solver
 
 O_FILES = $(addsuffix .o, $(FUNCTIONS))
 
-IDIR = .
-SDIR = .
-ODIR = obj
 LIBFT = libft
 
-CFLAGS = -Wall -Wextra -Werror -I $(DIR) -I $(LIBFT)
+CFLAGS = -Wall -Wextra -Werror -I . -I $(LIBFT)
 
 NAME = fillit
-
-DEPS = $(IDIR)/fillit.h
 
 .PHONY: all clean fclean re
 
 all: $(NAME)
 
-$(NAME): $(O_FILES) $(LIBFT)/libft.a
+$(NAME): $(O_FILES)
+	cd ./libft && make
 	gcc $^ $(LIBFT)/libft.a -o $@
 
-$(ODIR)/%.o: $(SDIR)/%.c $(DEPS)
-	@mkdir -p $(dir $@)
-	$(CC) -c -o $@ $< $(CFLAGS)
+%.o: %.c
+	gcc $(CFLAGS) -o $@ -c $<
 
 clean:
 	@/bin/rm -f $(addsuffix .o,$(FUNCTIONS))
+	cd ./libft && make clean
 
 fclean: clean
 	@/bin/rm -f $(NAME)
+	cd ./libft && make fclean
 
 re: fclean all
