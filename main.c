@@ -7,7 +7,10 @@ int main (int argc, char **argv)
 	t_tetr array[27];
 
 	if (argc != 2)
+	{
 		ft_putstr("usage ./fillit source_file\n");
+		exit(EXIT_SUCCESS);
+	}
 	i = 0;
 	ft_bzero(map, sizeof(map));
 	ft_bzero(array, sizeof(array));
