@@ -22,8 +22,6 @@ LIBFT = libft
 
 CFLAGS = -Wall -Wextra -Werror -I . -I $(LIBFT)
 
-FORCE:	;
-
 .PHONY: all clean fclean re
 
 all: $(NAME)
@@ -33,6 +31,8 @@ $(NAME): $(LIB) $(O_FILES) ./libft/libft.a
 
 $(LIB):		FORCE
 	@make -C ./libft
+
+FORCE:	;
 
 %.o: %.c
 	@gcc $(CFLAGS) -o $@ -c $<
